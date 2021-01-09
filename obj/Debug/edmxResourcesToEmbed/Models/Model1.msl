@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GestionAutocarsModelStoreContainer" CdmEntityContainer="GestionAutocarsEntities">
+    <EntitySetMapping Name="Autocars">
+      <EntityTypeMapping TypeName="GestionAutocarsModel.Autocar">
+        <MappingFragment StoreEntitySet="Autocar">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_societe" ColumnName="id_societe" />
+          <ScalarProperty Name="maricule" ColumnName="maricule" />
+          <ScalarProperty Name="nombre_places" ColumnName="nombre_places" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Navettes">
+      <EntityTypeMapping TypeName="GestionAutocarsModel.Navette">
+        <MappingFragment StoreEntitySet="Navette">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_ville_depart" ColumnName="id_ville_depart" />
+          <ScalarProperty Name="id_ville_arriver" ColumnName="id_ville_arriver" />
+          <ScalarProperty Name="heur_depart" ColumnName="heur_depart" />
+          <ScalarProperty Name="heur_arriver" ColumnName="heur_arriver" />
+          <ScalarProperty Name="disponible" ColumnName="disponible" />
+          <ScalarProperty Name="demande" ColumnName="demande" />
+          <ScalarProperty Name="id_car" ColumnName="id_car" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SocietéTransport">
+      <EntityTypeMapping TypeName="GestionAutocarsModel.SocietéTransport">
+        <MappingFragment StoreEntitySet="SocietéTransport">
+          <ScalarProperty Name="logo" ColumnName="logo" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="mdp" ColumnName="mdp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utilissateurs">
+      <EntityTypeMapping TypeName="GestionAutocarsModel.Utilissateur">
+        <MappingFragment StoreEntitySet="Utilissateur">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_Navette" ColumnName="id_Navette" />
+          <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="mdp" ColumnName="mdp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Villes">
+      <EntityTypeMapping TypeName="GestionAutocarsModel.Ville">
+        <MappingFragment StoreEntitySet="Ville">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Abonnements">
+      <EntityTypeMapping TypeName="GestionAutocarsModel.Abonnement">
+        <MappingFragment StoreEntitySet="Abonnement">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_use" ColumnName="id_use" />
+          <ScalarProperty Name="id_navette" ColumnName="id_navette" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Demandes">
+      <EntityTypeMapping TypeName="GestionAutocarsModel.Demande">
+        <MappingFragment StoreEntitySet="Demande">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_navette" ColumnName="id_navette" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -11,7 +11,9 @@ namespace GestionArticles.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SocietéTransport
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +23,24 @@ namespace GestionArticles.Models
         }
     
         public int id { get; set; }
+        [DisplayName("Nom du societé")]
+        [Required(ErrorMessage = "Nom du societé est obligatoire.")]
         public string nom { get; set; }
+        [DisplayName("email du societé")]
+        [Required(ErrorMessage = "email du societé est obligatoire.")]
         public string email { get; set; }
+        [DisplayName("tel du societé")]
+        [Required(ErrorMessage = "tel du societé est obligatoire.")]
         public string telephone { get; set; }
+        [DisplayName("login")]
+        [Required(ErrorMessage = "login du societé est obligatoire.")]
         public string login { get; set; }
+        [DisplayName("mdp")]
+        [Required(ErrorMessage = "mdp du societé est obligatoire.")]
         public string mdp { get; set; }
+        [DisplayName("Logo")]
+        
+        public string logo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Autocar> Autocars { get; set; }

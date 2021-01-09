@@ -4,13 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GestionAutocarsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'GestionAutocars.dbo.Abonnement' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+    <Schema Namespace="GestionAutocarsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
           <Property Name="id_navette" Type="int" />
           <Property Name="id_use" Type="int" />
-        </EntityType>-->
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="Autocar">
           <Key>
             <PropertyRef Name="id" />
@@ -20,12 +22,14 @@ warning 6013: The table/view 'GestionAutocars.dbo.Abonnement' does not have a pr
           <Property Name="maricule" Type="varchar" MaxLength="50" />
           <Property Name="nombre_places" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'GestionAutocars.dbo.Demande' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
           <Property Name="id_navette" Type="int" />
           <Property Name="id_user" Type="int" />
-        </EntityType>-->
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="Navette">
           <Key>
             <PropertyRef Name="id" />
@@ -49,6 +53,7 @@ warning 6013: The table/view 'GestionAutocars.dbo.Demande' does not have a prima
           <Property Name="telephone" Type="varchar" MaxLength="30" />
           <Property Name="login" Type="varchar" MaxLength="30" />
           <Property Name="mdp" Type="varchar" MaxLength="30" />
+          <Property Name="logo" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Utilissateur">
           <Key>
@@ -69,12 +74,30 @@ warning 6013: The table/view 'GestionAutocars.dbo.Demande' does not have a prima
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom" Type="varchar" MaxLength="30" />
         </EntityType>
-        <!--Errors Found During Generation:
-error 6004: The table 'GestionAutocars.dbo.Abonnement' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__Abonnemen__id_na__2B0A656D" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'GestionAutocars.dbo.Abonnement' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__Abonnemen__id_us__2BFE89A6" />-->
+        <Association Name="FK__Abonnemen__id_na__2B0A656D">
+          <End Role="Navette" Type="Self.Navette" Multiplicity="0..1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navette">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="id_navette" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__id_us__2BFE89A6">
+          <End Role="Utilissateur" Type="Self.Utilissateur" Multiplicity="0..1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilissateur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="id_use" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Autocar__id_soci__1EA48E88">
           <End Role="SocietéTransport" Type="Self.SocietéTransport" Multiplicity="0..1" />
           <End Role="Autocar" Type="Self.Autocar" Multiplicity="*" />
@@ -87,12 +110,30 @@ error 6004: The table 'GestionAutocars.dbo.Abonnement' is referenced by a relati
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__Demande__id_nave__282DF8C2" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__Demande__id_user__29221CFB" />-->
+        <Association Name="FK__Demande__id_nave__282DF8C2">
+          <End Role="Navette" Type="Self.Navette" Multiplicity="0..1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navette">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="id_navette" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Demande__id_user__29221CFB">
+          <End Role="Utilissateur" Type="Self.Utilissateur" Multiplicity="0..1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilissateur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Navette__id_car__236943A5">
           <End Role="Autocar" Type="Self.Autocar" Multiplicity="0..1" />
           <End Role="Navette" Type="Self.Navette" Multiplicity="*" />
@@ -142,14 +183,32 @@ error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relations
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="GestionAutocarsModelStoreContainer">
+          <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Autocar" EntityType="Self.Autocar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Demande" EntityType="Self.Demande" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Navette" EntityType="Self.Navette" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SocietéTransport" EntityType="Self.SocietéTransport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Utilissateur" EntityType="Self.Utilissateur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ville" EntityType="Self.Ville" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Abonnemen__id_na__2B0A656D" Association="Self.FK__Abonnemen__id_na__2B0A656D">
+            <End Role="Navette" EntitySet="Navette" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__id_us__2BFE89A6" Association="Self.FK__Abonnemen__id_us__2BFE89A6">
+            <End Role="Utilissateur" EntitySet="Utilissateur" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
           <AssociationSet Name="FK__Autocar__id_soci__1EA48E88" Association="Self.FK__Autocar__id_soci__1EA48E88">
             <End Role="SocietéTransport" EntitySet="SocietéTransport" />
             <End Role="Autocar" EntitySet="Autocar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__id_nave__282DF8C2" Association="Self.FK__Demande__id_nave__282DF8C2">
+            <End Role="Navette" EntitySet="Navette" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__id_user__29221CFB" Association="Self.FK__Demande__id_user__29221CFB">
+            <End Role="Utilissateur" EntitySet="Utilissateur" />
+            <End Role="Demande" EntitySet="Demande" />
           </AssociationSet>
           <AssociationSet Name="FK__Navette__id_car__236943A5" Association="Self.FK__Navette__id_car__236943A5">
             <End Role="Autocar" EntitySet="Autocar" />
@@ -168,8 +227,7 @@ error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relations
             <End Role="Utilissateur" EntitySet="Utilissateur" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GestionAutocarsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -200,6 +258,8 @@ error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relations
           <NavigationProperty Name="Ville" Relationship="Self.FK__Navette__id_vill__2180FB33" FromRole="Navette" ToRole="Ville" />
           <NavigationProperty Name="Ville1" Relationship="Self.FK__Navette__id_vill__22751F6C" FromRole="Navette" ToRole="Ville" />
           <NavigationProperty Name="Utilissateurs" Relationship="Self.FK__Utilissat__id_Na__2645B050" FromRole="Navette" ToRole="Utilissateur" />
+          <NavigationProperty Name="Abonnements" Relationship="GestionAutocarsModel.FK__Abonnemen__id_na__2B0A656D" FromRole="Navette" ToRole="Abonnement" />
+          <NavigationProperty Name="Demandes" Relationship="GestionAutocarsModel.FK__Demande__id_nave__282DF8C2" FromRole="Navette" ToRole="Demande" />
         </EntityType>
         <EntityType Name="SocietéTransport">
           <Key>
@@ -212,6 +272,7 @@ error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relations
           <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Autocars" Relationship="Self.FK__Autocar__id_soci__1EA48E88" FromRole="SocietéTransport" ToRole="Autocar" />
+          <Property Name="logo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Utilissateur">
           <Key>
@@ -225,6 +286,8 @@ error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relations
           <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Navette" Relationship="Self.FK__Utilissat__id_Na__2645B050" FromRole="Utilissateur" ToRole="Navette" />
+          <NavigationProperty Name="Abonnements" Relationship="GestionAutocarsModel.FK__Abonnemen__id_us__2BFE89A6" FromRole="Utilissateur" ToRole="Abonnement" />
+          <NavigationProperty Name="Demandes" Relationship="GestionAutocarsModel.FK__Demande__id_user__29221CFB" FromRole="Utilissateur" ToRole="Demande" />
         </EntityType>
         <EntityType Name="Ville">
           <Key>
@@ -321,7 +384,93 @@ error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relations
             <End Role="Navette" EntitySet="Navettes" />
             <End Role="Utilissateur" EntitySet="Utilissateurs" />
           </AssociationSet>
+          <EntitySet Name="Abonnements" EntityType="GestionAutocarsModel.Abonnement" />
+          <EntitySet Name="Demandes" EntityType="GestionAutocarsModel.Demande" />
+          <AssociationSet Name="FK__Abonnemen__id_na__2B0A656D" Association="GestionAutocarsModel.FK__Abonnemen__id_na__2B0A656D">
+            <End Role="Navette" EntitySet="Navettes" />
+            <End Role="Abonnement" EntitySet="Abonnements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__id_us__2BFE89A6" Association="GestionAutocarsModel.FK__Abonnemen__id_us__2BFE89A6">
+            <End Role="Utilissateur" EntitySet="Utilissateurs" />
+            <End Role="Abonnement" EntitySet="Abonnements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__id_nave__282DF8C2" Association="GestionAutocarsModel.FK__Demande__id_nave__282DF8C2">
+            <End Role="Navette" EntitySet="Navettes" />
+            <End Role="Demande" EntitySet="Demandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__id_user__29221CFB" Association="GestionAutocarsModel.FK__Demande__id_user__29221CFB">
+            <End Role="Utilissateur" EntitySet="Utilissateurs" />
+            <End Role="Demande" EntitySet="Demandes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_navette" Type="Int32" />
+          <Property Name="id_use" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Navette" Relationship="GestionAutocarsModel.FK__Abonnemen__id_na__2B0A656D" FromRole="Abonnement" ToRole="Navette" />
+          <NavigationProperty Name="Utilissateur" Relationship="GestionAutocarsModel.FK__Abonnemen__id_us__2BFE89A6" FromRole="Abonnement" ToRole="Utilissateur" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_navette" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Navette" Relationship="GestionAutocarsModel.FK__Demande__id_nave__282DF8C2" FromRole="Demande" ToRole="Navette" />
+          <NavigationProperty Name="Utilissateur" Relationship="GestionAutocarsModel.FK__Demande__id_user__29221CFB" FromRole="Demande" ToRole="Utilissateur" />
+        </EntityType>
+        <Association Name="FK__Abonnemen__id_na__2B0A656D">
+          <End Type="GestionAutocarsModel.Navette" Role="Navette" Multiplicity="0..1" />
+          <End Type="GestionAutocarsModel.Abonnement" Role="Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navette">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="id_navette" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__id_us__2BFE89A6">
+          <End Type="GestionAutocarsModel.Utilissateur" Role="Utilissateur" Multiplicity="0..1" />
+          <End Type="GestionAutocarsModel.Abonnement" Role="Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilissateur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="id_use" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Demande__id_nave__282DF8C2">
+          <End Type="GestionAutocarsModel.Navette" Role="Navette" Multiplicity="0..1" />
+          <End Type="GestionAutocarsModel.Demande" Role="Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navette">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="id_navette" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Demande__id_user__29221CFB">
+          <End Type="GestionAutocarsModel.Utilissateur" Role="Utilissateur" Multiplicity="0..1" />
+          <End Type="GestionAutocarsModel.Demande" Role="Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilissateur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -355,6 +504,7 @@ error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relations
           <EntitySetMapping Name="SocietéTransport">
             <EntityTypeMapping TypeName="GestionAutocarsModel.SocietéTransport">
               <MappingFragment StoreEntitySet="SocietéTransport">
+                <ScalarProperty Name="logo" ColumnName="logo" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nom" ColumnName="nom" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -382,6 +532,24 @@ error 6004: The table 'GestionAutocars.dbo.Demande' is referenced by a relations
               <MappingFragment StoreEntitySet="Ville">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Abonnements">
+            <EntityTypeMapping TypeName="GestionAutocarsModel.Abonnement">
+              <MappingFragment StoreEntitySet="Abonnement">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_use" ColumnName="id_use" />
+                <ScalarProperty Name="id_navette" ColumnName="id_navette" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Demandes">
+            <EntityTypeMapping TypeName="GestionAutocarsModel.Demande">
+              <MappingFragment StoreEntitySet="Demande">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_navette" ColumnName="id_navette" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -8,13 +8,19 @@
         <EntityTypeShape EntityType="GestionAutocarsModel.Autocar" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionAutocarsModel.Navette" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionAutocarsModel.SocietéTransport" Width="1.5" PointX="1.5" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionAutocarsModel.Utilissateur" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionAutocarsModel.Utilissateur" Width="1.5" PointX="5.875" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionAutocarsModel.Ville" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="GestionAutocarsModel.FK__Autocar__id_soci__1EA48E88" ManuallyRouted="false" />
         <AssociationConnector Association="GestionAutocarsModel.FK__Navette__id_car__236943A5" ManuallyRouted="false" />
         <AssociationConnector Association="GestionAutocarsModel.FK__Navette__id_vill__2180FB33" ManuallyRouted="false" />
         <AssociationConnector Association="GestionAutocarsModel.FK__Navette__id_vill__22751F6C" ManuallyRouted="false" />
         <AssociationConnector Association="GestionAutocarsModel.FK__Utilissat__id_Na__2645B050" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GestionAutocarsModel.Abonnement" Width="1.5" PointX="8.125" PointY="0.75" />
+        <EntityTypeShape EntityType="GestionAutocarsModel.Demande" Width="1.5" PointX="8.125" PointY="3.75" />
+        <AssociationConnector Association="GestionAutocarsModel.FK__Abonnemen__id_na__2B0A656D" />
+        <AssociationConnector Association="GestionAutocarsModel.FK__Abonnemen__id_us__2BFE89A6" />
+        <AssociationConnector Association="GestionAutocarsModel.FK__Demande__id_nave__282DF8C2" />
+        <AssociationConnector Association="GestionAutocarsModel.FK__Demande__id_user__29221CFB" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

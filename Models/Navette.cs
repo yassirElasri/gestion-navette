@@ -18,6 +18,8 @@ namespace GestionArticles.Models
         public Navette()
         {
             this.Utilissateurs = new HashSet<Utilissateur>();
+            this.Abonnements = new HashSet<Abonnement>();
+            this.Demandes = new HashSet<Demande>();
         }
     
         public int id { get; set; }
@@ -34,5 +36,9 @@ namespace GestionArticles.Models
         public virtual Ville Ville1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Utilissateur> Utilissateurs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Abonnement> Abonnements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Demande> Demandes { get; set; }
     }
 }

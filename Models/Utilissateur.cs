@@ -14,6 +14,13 @@ namespace GestionArticles.Models
     
     public partial class Utilissateur
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Utilissateur()
+        {
+            this.Abonnements = new HashSet<Abonnement>();
+            this.Demandes = new HashSet<Demande>();
+        }
+    
         public int id { get; set; }
         public Nullable<int> id_Navette { get; set; }
         public string nom_complet { get; set; }
@@ -23,5 +30,9 @@ namespace GestionArticles.Models
         public string mdp { get; set; }
     
         public virtual Navette Navette { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Abonnement> Abonnements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Demande> Demandes { get; set; }
     }
 }

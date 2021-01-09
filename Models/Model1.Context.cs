@@ -30,5 +30,7 @@ namespace GestionArticles.Models
         public virtual DbSet<SocietéTransport> SocietéTransport { get; set; }
         public virtual DbSet<Utilissateur> Utilissateurs { get; set; }
         public virtual DbSet<Ville> Villes { get; set; }
+        public virtual DbSet<Abonnement> Abonnements { get; set; }
+        public virtual DbSet<Demande> Demandes { get; set; }
     }
 }

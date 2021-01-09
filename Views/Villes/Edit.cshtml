@@ -1,0 +1,41 @@
+﻿@model GestionArticles.Models.Ville
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Modifier ville</h2>
+
+
+<form method="post" action="/villes/@Model.id/edit">
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+      
+        <hr />
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Modifier" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
