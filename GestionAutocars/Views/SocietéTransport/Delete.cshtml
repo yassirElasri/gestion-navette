@@ -1,0 +1,75 @@
+﻿@model GestionArticles.Models.SocietéTransport
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Supprimer societé</h2>
+
+<h3>voulez vous vraiment supprimer cette societé?</h3>
+<div>
+    <h4>SocietéTransport</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <img src="~/Pictures/@Model.logo" alt="@Model.logo" width="200" />
+        </dt>
+
+        <dd>
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mdp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mdp)
+        </dd>
+
+
+
+      
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Annuler", "Index")
+        </div>
+    }
+</div>

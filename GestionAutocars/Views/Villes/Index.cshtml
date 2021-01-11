@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GestionArticles.Models.Ville>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Liste des villes</h2>
+
+<p>
+   <a href="/villes/ajouter">ajouter ville</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            <a href="/villes/@item.id/edit">Modifier</a> |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+             <a href="/villes/@item.id/delete">Supprimer</a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace GestionAutocars
+namespace GestionArticles
 {
     public class FilterConfig
     {

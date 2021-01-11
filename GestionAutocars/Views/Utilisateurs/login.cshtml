@@ -1,0 +1,23 @@
+﻿@model GestionArticles.Models.Utilissateur
+
+@{
+    ViewBag.Title = "login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Se connecter</h2>
+
+
+
+<form action="/utilisateurs/seconnecter" method="post">
+    <div class="form-group">
+        Login @Html.TextBoxFor(s => s.login,new { @Class="form-control"})
+
+    </div>
+    <div class="form-group">
+        
+      Lot de passe  @Html.TextBoxFor(s => s.mdp, new { @Class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Se connecter</button>
+</form>

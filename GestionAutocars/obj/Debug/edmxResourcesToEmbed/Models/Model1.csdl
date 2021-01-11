@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestionAutocarsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Autocar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_societe" Type="Int32" />
+    <Property Name="maricule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nombre_places" Type="Int32" />
+    <NavigationProperty Name="SocietéTransport" Relationship="Self.FK__Autocar__id_soci__1EA48E88" FromRole="Autocar" ToRole="SocietéTransport" />
+    <NavigationProperty Name="Navettes" Relationship="Self.FK__Navette__id_car__236943A5" FromRole="Autocar" ToRole="Navette" />
+  </EntityType>
+  <EntityType Name="Navette">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_ville_depart" Type="Int32" />
+    <Property Name="id_ville_arriver" Type="Int32" />
+    <Property Name="heur_depart" Type="DateTime" Precision="0" />
+    <Property Name="heur_arriver" Type="DateTime" Precision="0" />
+    <Property Name="disponible" Type="Boolean" />
+    <Property Name="demande" Type="Boolean" />
+    <Property Name="id_car" Type="Int32" />
+    <NavigationProperty Name="Autocar" Relationship="Self.FK__Navette__id_car__236943A5" FromRole="Navette" ToRole="Autocar" />
+    <NavigationProperty Name="Ville" Relationship="Self.FK__Navette__id_vill__2180FB33" FromRole="Navette" ToRole="Ville" />
+    <NavigationProperty Name="Ville1" Relationship="Self.FK__Navette__id_vill__22751F6C" FromRole="Navette" ToRole="Ville" />
+    <NavigationProperty Name="Utilissateurs" Relationship="Self.FK__Utilissat__id_Na__2645B050" FromRole="Navette" ToRole="Utilissateur" />
+    <NavigationProperty Name="Abonnements" Relationship="GestionAutocarsModel.FK__Abonnemen__id_na__2B0A656D" FromRole="Navette" ToRole="Abonnement" />
+    <NavigationProperty Name="Demandes" Relationship="GestionAutocarsModel.FK__Demande__id_nave__282DF8C2" FromRole="Navette" ToRole="Demande" />
+  </EntityType>
+  <EntityType Name="SocietéTransport">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telephone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Autocars" Relationship="Self.FK__Autocar__id_soci__1EA48E88" FromRole="SocietéTransport" ToRole="Autocar" />
+    <Property Name="logo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="cofirm_mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Utilissateur">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_Navette" Type="Int32" />
+    <Property Name="nom_complet" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telephone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Navette" Relationship="Self.FK__Utilissat__id_Na__2645B050" FromRole="Utilissateur" ToRole="Navette" />
+    <NavigationProperty Name="Abonnements" Relationship="GestionAutocarsModel.FK__Abonnemen__id_us__2BFE89A6" FromRole="Utilissateur" ToRole="Abonnement" />
+    <NavigationProperty Name="Demandes" Relationship="GestionAutocarsModel.FK__Demande__id_user__29221CFB" FromRole="Utilissateur" ToRole="Demande" />
+    <Property Name="cofirm_mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="isAdmin" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Ville">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Navettes" Relationship="Self.FK__Navette__id_vill__2180FB33" FromRole="Ville" ToRole="Navette" />
+    <NavigationProperty Name="Navettes1" Relationship="Self.FK__Navette__id_vill__22751F6C" FromRole="Ville" ToRole="Navette" />
+  </EntityType>
+  <Association Name="FK__Autocar__id_soci__1EA48E88">
+    <End Role="SocietéTransport" Type="Self.SocietéTransport" Multiplicity="0..1" />
+    <End Role="Autocar" Type="Self.Autocar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SocietéTransport">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Autocar">
+        <PropertyRef Name="id_societe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Navette__id_car__236943A5">
+    <End Role="Autocar" Type="Self.Autocar" Multiplicity="0..1" />
+    <End Role="Navette" Type="Self.Navette" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autocar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Navette">
+        <PropertyRef Name="id_car" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Navette__id_vill__2180FB33">
+    <End Role="Ville" Type="Self.Ville" Multiplicity="0..1" />
+    <End Role="Navette" Type="Self.Navette" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ville">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Navette">
+        <PropertyRef Name="id_ville_depart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Navette__id_vill__22751F6C">
+    <End Role="Ville" Type="Self.Ville" Multiplicity="0..1" />
+    <End Role="Navette" Type="Self.Navette" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ville">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Navette">
+        <PropertyRef Name="id_ville_arriver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Utilissat__id_Na__2645B050">
+    <End Role="Navette" Type="Self.Navette" Multiplicity="0..1" />
+    <End Role="Utilissateur" Type="Self.Utilissateur" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Navette">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Utilissateur">
+        <PropertyRef Name="id_Navette" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GestionAutocarsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Autocars" EntityType="Self.Autocar" />
+    <EntitySet Name="Navettes" EntityType="Self.Navette" />
+    <EntitySet Name="SocietéTransport" EntityType="Self.SocietéTransport" />
+    <EntitySet Name="Utilissateurs" EntityType="Self.Utilissateur" />
+    <EntitySet Name="Villes" EntityType="Self.Ville" />
+    <AssociationSet Name="FK__Autocar__id_soci__1EA48E88" Association="Self.FK__Autocar__id_soci__1EA48E88">
+      <End Role="SocietéTransport" EntitySet="SocietéTransport" />
+      <End Role="Autocar" EntitySet="Autocars" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Navette__id_car__236943A5" Association="Self.FK__Navette__id_car__236943A5">
+      <End Role="Autocar" EntitySet="Autocars" />
+      <End Role="Navette" EntitySet="Navettes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Navette__id_vill__2180FB33" Association="Self.FK__Navette__id_vill__2180FB33">
+      <End Role="Ville" EntitySet="Villes" />
+      <End Role="Navette" EntitySet="Navettes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Navette__id_vill__22751F6C" Association="Self.FK__Navette__id_vill__22751F6C">
+      <End Role="Ville" EntitySet="Villes" />
+      <End Role="Navette" EntitySet="Navettes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Utilissat__id_Na__2645B050" Association="Self.FK__Utilissat__id_Na__2645B050">
+      <End Role="Navette" EntitySet="Navettes" />
+      <End Role="Utilissateur" EntitySet="Utilissateurs" />
+    </AssociationSet>
+    <EntitySet Name="Abonnements" EntityType="GestionAutocarsModel.Abonnement" />
+    <EntitySet Name="Demandes" EntityType="GestionAutocarsModel.Demande" />
+    <AssociationSet Name="FK__Abonnemen__id_na__2B0A656D" Association="GestionAutocarsModel.FK__Abonnemen__id_na__2B0A656D">
+      <End Role="Navette" EntitySet="Navettes" />
+      <End Role="Abonnement" EntitySet="Abonnements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Abonnemen__id_us__2BFE89A6" Association="GestionAutocarsModel.FK__Abonnemen__id_us__2BFE89A6">
+      <End Role="Utilissateur" EntitySet="Utilissateurs" />
+      <End Role="Abonnement" EntitySet="Abonnements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Demande__id_nave__282DF8C2" Association="GestionAutocarsModel.FK__Demande__id_nave__282DF8C2">
+      <End Role="Navette" EntitySet="Navettes" />
+      <End Role="Demande" EntitySet="Demandes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Demande__id_user__29221CFB" Association="GestionAutocarsModel.FK__Demande__id_user__29221CFB">
+      <End Role="Utilissateur" EntitySet="Utilissateurs" />
+      <End Role="Demande" EntitySet="Demandes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Abonnement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id_navette" Type="Int32" />
+    <Property Name="id_use" Type="Int32" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Navette" Relationship="GestionAutocarsModel.FK__Abonnemen__id_na__2B0A656D" FromRole="Abonnement" ToRole="Navette" />
+    <NavigationProperty Name="Utilissateur" Relationship="GestionAutocarsModel.FK__Abonnemen__id_us__2BFE89A6" FromRole="Abonnement" ToRole="Utilissateur" />
+  </EntityType>
+  <EntityType Name="Demande">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id_navette" Type="Int32" />
+    <Property Name="id_user" Type="Int32" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Navette" Relationship="GestionAutocarsModel.FK__Demande__id_nave__282DF8C2" FromRole="Demande" ToRole="Navette" />
+    <NavigationProperty Name="Utilissateur" Relationship="GestionAutocarsModel.FK__Demande__id_user__29221CFB" FromRole="Demande" ToRole="Utilissateur" />
+  </EntityType>
+  <Association Name="FK__Abonnemen__id_na__2B0A656D">
+    <End Type="GestionAutocarsModel.Navette" Role="Navette" Multiplicity="0..1" />
+    <End Type="GestionAutocarsModel.Abonnement" Role="Abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Navette">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Abonnement">
+        <PropertyRef Name="id_navette" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Abonnemen__id_us__2BFE89A6">
+    <End Type="GestionAutocarsModel.Utilissateur" Role="Utilissateur" Multiplicity="0..1" />
+    <End Type="GestionAutocarsModel.Abonnement" Role="Abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilissateur">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Abonnement">
+        <PropertyRef Name="id_use" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Demande__id_nave__282DF8C2">
+    <End Type="GestionAutocarsModel.Navette" Role="Navette" Multiplicity="0..1" />
+    <End Type="GestionAutocarsModel.Demande" Role="Demande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Navette">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Demande">
+        <PropertyRef Name="id_navette" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Demande__id_user__29221CFB">
+    <End Type="GestionAutocarsModel.Utilissateur" Role="Utilissateur" Multiplicity="0..1" />
+    <End Type="GestionAutocarsModel.Demande" Role="Demande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilissateur">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Demande">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
