@@ -1,0 +1,75 @@
+﻿@model GestionArticles.Models.Navette
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Navette</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.heur_depart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heur_depart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.heur_arriver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heur_arriver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.disponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.disponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.demande)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.demande)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Autocar.maricule)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Autocar.maricule)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ville.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ville.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ville1.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ville1.nom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

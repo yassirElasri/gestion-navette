@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>liste des societers</h2>
+<h2>Liste des societes</h2>
 
 <p>
-    <a href="/Societes/ajouter">ajouter societers</a>
+    @Html.ActionLink("Ajouter societé", "Create")
 </p>
 <table class="table">
     <tr>
@@ -30,15 +30,15 @@
             @Html.DisplayNameFor(model => model.mdp)
         </th>
 
-        <th>Action</th>
+       
+        <th>Actions</th>
     </tr>
 
-    @foreach (var item in Model)
-    {
+@foreach (var item in Model) {
 <tr>
     <td>
-        <img src="~/Pictures/@item.logo" alt="@item.logo" width="200"  />
-        
+
+        <img src="~/Pictures/@item.logo" alt="@item.logo" width="200" />
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.nom)
@@ -56,12 +56,13 @@
         @Html.DisplayFor(modelItem => item.mdp)
     </td>
 
+   
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+        @Html.ActionLink("modifier", "Edit", new { id = item.id }) |
         @Html.ActionLink("Details", "Details", new { id = item.id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+        @Html.ActionLink("supprimer", "Delete", new { id = item.id })
     </td>
 </tr>
-    }
+}
 
 </table>

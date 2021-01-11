@@ -42,6 +42,7 @@
     <Property Name="mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Autocars" Relationship="Self.FK__Autocar__id_soci__1EA48E88" FromRole="SocietéTransport" ToRole="Autocar" />
     <Property Name="logo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="cofirm_mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Utilissateur">
     <Key>
@@ -57,6 +58,8 @@
     <NavigationProperty Name="Navette" Relationship="Self.FK__Utilissat__id_Na__2645B050" FromRole="Utilissateur" ToRole="Navette" />
     <NavigationProperty Name="Abonnements" Relationship="GestionAutocarsModel.FK__Abonnemen__id_us__2BFE89A6" FromRole="Utilissateur" ToRole="Abonnement" />
     <NavigationProperty Name="Demandes" Relationship="GestionAutocarsModel.FK__Demande__id_user__29221CFB" FromRole="Utilissateur" ToRole="Demande" />
+    <Property Name="cofirm_mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="isAdmin" Type="Boolean" />
   </EntityType>
   <EntityType Name="Ville">
     <Key>

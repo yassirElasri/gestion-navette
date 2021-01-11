@@ -4,18 +4,17 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Modifier</h2>
 
-
-@using (Html.BeginForm())
-{
+<form action="/societes/@Model.id/edit" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>SocietéTransport</h4>
+
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.logo)
 
         <div class="form-group">
             @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -60,8 +59,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.logo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.logo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.logo, "", new { @class = "text-danger" })
+                <img src="~/Pictures/@Model.logo" alt="@Model.logo" width="200" />
+                <input type="file" name="_image" value="" />
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cofirm_mdp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cofirm_mdp, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cofirm_mdp, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -71,7 +79,7 @@
             </div>
         </div>
     </div>
-}
+</form>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

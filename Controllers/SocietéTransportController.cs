@@ -11,7 +11,7 @@ using GestionArticles.Models;
 
 namespace GestionArticles.Controllers
 {
-    [RoutePrefix("Societes")]
+    [RoutePrefix("societes")]
     public class SocietéTransportController : Controller
     {
         private GestionAutocarsEntities db = new GestionAutocarsEntities();
@@ -22,9 +22,9 @@ namespace GestionArticles.Controllers
         {
             return View(db.SocietéTransport.ToList());
         }
+        [Route("{id}/details")]
 
         // GET: SocietéTransport/Details/5
-        [Route("{id}/details")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,9 +38,9 @@ namespace GestionArticles.Controllers
             }
             return View(societéTransport);
         }
+        [Route("ajouter")]
 
         // GET: SocietéTransport/Create
-        [Route("ajouter")]
         public ActionResult Create()
         {
             return View();
@@ -51,29 +51,25 @@ namespace GestionArticles.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("ajouter")]
-        public ActionResult Create([Bind(Include = "nom,email,telephone,login,mdp")] SocietéTransport societéTransport,HttpPostedFileBase _image)
+        [Route("ajouter")]                                                  
+        public ActionResult Create([Bind(Include = "nom,email,telephone,login,mdp,logo,cofirm_mdp")] SocietéTransport societéTransport,HttpPostedFileBase _image)
         {
-            if (ModelState.IsValid)
-            {
-                if (_image!=null)
+           
+                if (_image != null)
                 {
                     string FileName = Path.GetFileNameWithoutExtension(_image.FileName);
                     string FileExtension = Path.GetExtension(_image.FileName);
-
-                    FileName = FileName.Trim() + "_" + DateTime.Now.ToString("dd-mm-ss") + FileExtension;
+                    FileName = FileName.Trim() + "_" + DateTime.Now.ToString("dd-mm-ss")+FileExtension;
                     string UploadPath = "~/Pictures/";
                     societéTransport.logo = FileName;
-                    _image.SaveAs(Server.MapPath(UploadPath+ FileName));
-
-
+                    _image.SaveAs(Server.MapPath(UploadPath + FileName));
                 }
                 db.SocietéTransport.Add(societéTransport);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            
 
-            return View(societéTransport);
+        
         }
 
         // GET: SocietéTransport/Edit/5
@@ -98,10 +94,21 @@ namespace GestionArticles.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("{id}/edit")]
-        public ActionResult Edit([Bind(Include = "id,nom,email,telephone,login,mdp,logo")] SocietéTransport societéTransport)
+        public ActionResult Edit([Bind(Include = "id,nom,email,telephone,login,mdp,logo,cofirm_mdp")]
+        SocietéTransport societéTransport,HttpPostedFileBase _image)
         {
             if (ModelState.IsValid)
             {
+                if (_image!=null)
+                {
+                    string FileName = Path.GetFileNameWithoutExtension(_image.FileName);
+                    string FileExtension = Path.GetExtension(_image.FileName);
+                    FileName = FileName.Trim() + "_" + DateTime.Now.ToString("dd-mm-ss") + FileExtension;
+                    string UploadPath = "~/Pictures/";
+                    societéTransport.logo = FileName;
+                    _image.SaveAs(Server.MapPath(UploadPath + FileName));
+
+                }
                 db.Entry(societéTransport).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -126,10 +133,9 @@ namespace GestionArticles.Controllers
         }
 
         // POST: SocietéTransport/Delete/5
-        [HttpPost]
-        [Route("{id}/deleteConf")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-       
+        [Route("{id}/delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             SocietéTransport societéTransport = db.SocietéTransport.Find(id);
@@ -146,5 +152,83 @@ namespace GestionArticles.Controllers
             }
             base.Dispose(disposing);
         }
+        [Route("seconnecter")]
+        public ActionResult login()
+        {
+            return View();
+        }
+
+        [Route("seconnecter")]
+        [HttpPost]
+        public ActionResult login(SocietéTransport u)
+        {
+            var trouve = db.SocietéTransport.Where(s => s.login == u.login && s.mdp == u.mdp).FirstOrDefault();
+            if (trouve == null)
+            {
+                return View(u);
+            }
+            Session["id_societe"] = trouve.id;
+            ViewData["nom_societe"] = trouve.nom;
+ 
+            return RedirectToAction("Index1", trouve);
+        }
+        [Route("index1/{u?}")]
+        public ActionResult Index1(SocietéTransport u=null)
+        {
+            if (u == null)
+            {
+                return RedirectToAction("login");
+            }
+
+            return View();
+        }
+    
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("ajouterCar")]
+        public ActionResult CreateCar([Bind(Include = "id_societe,maricule,nombre_places")] Autocar autocar)
+        {
+           
+            if (ModelState.IsValid)
+            {
+                db.Autocars.Add(autocar);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.id_societe = new SelectList(db.SocietéTransport, "id", "nom", autocar.id_societe);
+            return View(autocar);
+        }
+
+        [Route("ajouterNavette")]
+        public ActionResult ajouterNavette()
+        {
+            ViewBag.id_car = new SelectList(db.Autocars, "id", "maricule");
+            ViewBag.id_ville_depart = new SelectList(db.Villes, "id", "nom");
+            ViewBag.id_ville_arriver = new SelectList(db.Villes, "id", "nom");
+            return View();
+        }
+
+        // POST: Navettes/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("ajouterNavette")]
+        public ActionResult ajouterNavette([Bind(Include = "id,id_ville_depart,id_ville_arriver,heur_depart,heur_arriver,disponible,demande,id_car")] Navette navette)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Navettes.Add(navette);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.id_car = new SelectList(db.Autocars, "id", "maricule", navette.id_car);
+            ViewBag.id_ville_depart = new SelectList(db.Villes, "id", "nom", navette.id_ville_depart);
+            ViewBag.id_ville_arriver = new SelectList(db.Villes, "id", "nom", navette.id_ville_arriver);
+            return View(navette);
+        }
+
     }
 }

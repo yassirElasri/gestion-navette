@@ -11,7 +11,8 @@ namespace GestionArticles.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Utilissateur
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,15 +21,34 @@ namespace GestionArticles.Models
             this.Abonnements = new HashSet<Abonnement>();
             this.Demandes = new HashSet<Demande>();
         }
-    
+
         public int id { get; set; }
         public Nullable<int> id_Navette { get; set; }
+        [Display(Name = "nom de client")]
+        [Required(ErrorMessage = "le nom est obligatoire.")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "erreur size")]
         public string nom_complet { get; set; }
+        [Display(Name = "E - mail")]
+        [Required(ErrorMessage = "l'email est obligatoire.")]
+        [RegularExpression(@"^[A - Za-z0-9](\.?[a-z0-9]){5,}@gmail\.com$", ErrorMessage = "forma err")]
         public string email { get; set; }
+        [Required(ErrorMessage = "le tel est obligatoire.")]
         public string telephone { get; set; }
+        [Required(ErrorMessage = "le login est obligatoire.")]
         public string login { get; set; }
+        [Required(ErrorMessage = "le mot de passe est obligatoire.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "mot de passe")]
         public string mdp { get; set; }
-    
+        [Required(ErrorMessage = "le confirmation est obligatoire.")]
+        [Display(Name = "confirmation du mdp")]
+        [DataType(DataType.Password)]
+        [Compare("mdp")]
+        public string cofirm_mdp { get; set; }
+        public bool isAdmin { get; set; }
+
+
+
         public virtual Navette Navette { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Abonnement> Abonnements { get; set; }

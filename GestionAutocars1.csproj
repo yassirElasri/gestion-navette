@@ -128,8 +128,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AutocarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\loginController.cs" />
+    <Compile Include="Controllers\NavettesController.cs" />
     <Compile Include="Controllers\SocietéTransportController.cs" />
+    <Compile Include="Controllers\UtilisateursController.cs" />
     <Compile Include="Controllers\VillesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -235,10 +239,32 @@
     <Content Include="Views\SocietéTransport\Details.cshtml" />
     <Content Include="Views\SocietéTransport\Edit.cshtml" />
     <Content Include="Views\SocietéTransport\Index.cshtml" />
+    <Content Include="Views\Autocars\Create.cshtml" />
+    <Content Include="Views\Autocars\Delete.cshtml" />
+    <Content Include="Views\Autocars\Details.cshtml" />
+    <Content Include="Views\Autocars\Edit.cshtml" />
+    <Content Include="Views\Autocars\Index.cshtml" />
+    <Content Include="Views\Utilisateurs\Create.cshtml" />
+    <Content Include="Views\Utilisateurs\Delete.cshtml" />
+    <Content Include="Views\Utilisateurs\Details.cshtml" />
+    <Content Include="Views\Utilisateurs\Edit.cshtml" />
+    <Content Include="Views\Utilisateurs\Index.cshtml" />
+    <Content Include="Views\Utilisateurs\login.cshtml" />
+    <Content Include="Views\SocietéTransport\login.cshtml" />
+    <Content Include="Views\SocietéTransport\index1.cshtml" />
+    <Content Include="Views\Utilisateurs\Index1.cshtml" />
+    <Content Include="Views\SocietéTransport\CreateCar.cshtml" />
+    <Content Include="Views\Navettes\Create.cshtml" />
+    <Content Include="Views\Navettes\Delete.cshtml" />
+    <Content Include="Views\Navettes\Details.cshtml" />
+    <Content Include="Views\Navettes\Edit.cshtml" />
+    <Content Include="Views\Navettes\Index.cshtml" />
+    <Content Include="Views\SocietéTransport\ajouterNavette.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Pictures\" />
+    <Folder Include="Views\login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

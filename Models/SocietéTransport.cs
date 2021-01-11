@@ -11,7 +11,6 @@ namespace GestionArticles.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class SocietéTransport
@@ -21,28 +20,35 @@ namespace GestionArticles.Models
         {
             this.Autocars = new HashSet<Autocar>();
         }
-    
+
         public int id { get; set; }
-        [DisplayName("Nom du societé")]
-        [Required(ErrorMessage = "Nom du societé est obligatoire.")]
+        [Display(Name = "nom du societe")]
+        [Required(ErrorMessage = "le nom est obligatoire.")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "erreur size")]
         public string nom { get; set; }
-        [DisplayName("email du societé")]
-        [Required(ErrorMessage = "email du societé est obligatoire.")]
+        [Display(Name = "E - mail")]
+        [Required(ErrorMessage = "l'email est obligatoire.")]
+        [RegularExpression(@"^[A - Za-z0-9](\.?[a-z0-9]){5,}@gmail\.com$", ErrorMessage = "forma err")]
         public string email { get; set; }
-        [DisplayName("tel du societé")]
-        [Required(ErrorMessage = "tel du societé est obligatoire.")]
+        [Required(ErrorMessage = "le tel est obligatoire.")]
         public string telephone { get; set; }
-        [DisplayName("login")]
-        [Required(ErrorMessage = "login du societé est obligatoire.")]
+        [Required(ErrorMessage = "le login est obligatoire.")]
         public string login { get; set; }
-        [DisplayName("mdp")]
-        [Required(ErrorMessage = "mdp du societé est obligatoire.")]
+        [Required(ErrorMessage = "le mot de passe est obligatoire.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "mot de passe")]
         public string mdp { get; set; }
-        [DisplayName("Logo")]
-        
+        [Required(ErrorMessage = "le logo est obligatoire.")]
         public string logo { get; set; }
-    
+        [Required(ErrorMessage = "le confirmation est obligatoire.")]
+        [Display(Name = "confirmation du mdp")]
+        [DataType(DataType.Password)]
+        [Compare("mdp")]
+        public string cofirm_mdp { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Autocar> Autocars { get; set; }
     }
 }
+
+

@@ -28,6 +28,7 @@
     <EntitySetMapping Name="SocietéTransport">
       <EntityTypeMapping TypeName="GestionAutocarsModel.SocietéTransport">
         <MappingFragment StoreEntitySet="SocietéTransport">
+          <ScalarProperty Name="cofirm_mdp" ColumnName="cofirm_mdp" />
           <ScalarProperty Name="logo" ColumnName="logo" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nom" ColumnName="nom" />
@@ -41,6 +42,8 @@
     <EntitySetMapping Name="Utilissateurs">
       <EntityTypeMapping TypeName="GestionAutocarsModel.Utilissateur">
         <MappingFragment StoreEntitySet="Utilissateur">
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="cofirm_mdp" ColumnName="cofirm_mdp" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="id_Navette" ColumnName="id_Navette" />
           <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
