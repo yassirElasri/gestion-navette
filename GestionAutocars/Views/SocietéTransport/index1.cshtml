@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     string nom = Request.QueryString["nom"];
     string id = Request.QueryString["id"];
+
+
 }
 
 <h2>welcooooome @nom </h2>
@@ -17,6 +19,7 @@
 
 <form action="/societes/ajouterCar" method="post">
     @Html.AntiForgeryToken()
+
 
     <div class="form-horizontal">
         <input type="hidden" name="id_societe" value="@id" />
@@ -53,8 +56,9 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+
 <p>
-    @Html.ActionLink("Ajouter navette", "ajouterNavette")
+    @Html.ActionLink("Ajouter navette", "ajouterNavette", new { idd = @id })
 </p>
 
 

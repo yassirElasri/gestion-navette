@@ -50,5 +50,3 @@ namespace GestionArticles.Models
         public virtual ICollection<Autocar> Autocars { get; set; }
     }
 }
-
-

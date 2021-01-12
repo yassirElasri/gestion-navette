@@ -21,9 +21,10 @@ namespace GestionArticles.Controllers
             var utilissateurs = db.Utilissateurs.Include(u => u.Navette);
             return View(utilissateurs.ToList());
         }
-        [Route("{id}/details")]
+     
 
         // GET: Utilisateurs/Details/5
+        [Route("{id}/details")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -65,6 +66,7 @@ namespace GestionArticles.Controllers
         }
 
         // GET: Utilisateurs/Edit/5
+        [Route("{id}/edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,7 +87,10 @@ namespace GestionArticles.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,id_Navette,nom_complet,email,telephone,login,mdp,cofirm_mdp")] Utilissateur utilissateur)
+        [Route("{id}/edit")]
+
+
+        public ActionResult Edit([Bind(Include = "id_Navette,nom_complet,email,telephone,login")] Utilissateur utilissateur)
         {
             if (ModelState.IsValid)
             {
@@ -98,6 +103,7 @@ namespace GestionArticles.Controllers
         }
 
         // GET: Utilisateurs/Delete/5
+        [Route("{id}/delete")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,10 +119,13 @@ namespace GestionArticles.Controllers
         }
 
         // POST: Utilisateurs/Delete/5
-        [HttpPost, ActionName("Delete")]
+    
+        [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("{id}/Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             Utilissateur utilissateur = db.Utilissateurs.Find(id);
             db.Utilissateurs.Remove(utilissateur);
             db.SaveChanges();
