@@ -7,14 +7,12 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
-{
+<form action="/utilisateurs/@Model.id/edit" method="post">
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
         <h4>Utilissateur</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
@@ -57,19 +55,14 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.mdp, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.mdp, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.mdp, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
+        
 
         <div class="form-group">
-            @Html.LabelFor(model => model.cofirm_mdp, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.isAdmin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cofirm_mdp, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cofirm_mdp, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.isAdmin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.isAdmin, "", new { @class = "text-danger" })
             </div>
         </div>
 

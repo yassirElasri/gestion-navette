@@ -1,0 +1,67 @@
+﻿@model IEnumerable<GestionArticles.Models.Navette>
+@{
+    ViewBag.Title = "trouver_navette";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>trouver_navette</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.heur_depart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.heur_arriver)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.disponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.demande)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Autocar.maricule)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ville.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ville1.nom)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.heur_depart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.heur_arriver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.disponible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.demande)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Autocar.maricule)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ville.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ville1.nom)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

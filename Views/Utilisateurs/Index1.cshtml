@@ -2,7 +2,18 @@
 @{
     ViewBag.Title = "Index1";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string nom = Request.QueryString["nom"];
+    string id = Request.QueryString["id"];
+    int idd = Int16.Parse(id);
 }
 
-<h2>welcommeee user</h2>
+<h2>welcommeee  @nom</h2>
 
+
+<p>
+    @Html.ActionLink("trouver navette", "trouver_navette")
+</p>
+
+<p>
+    @Html.ActionLink("ajouter une demande", "ajouterNavette", new { idd = @idd })
+</p>

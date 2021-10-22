@@ -20,6 +20,7 @@ namespace GestionArticles.Controllers
         [Route()]
         public ActionResult Index()
         {
+
             return View(db.SocietéTransport.ToList());
         }
         [Route("{id}/details")]
@@ -188,7 +189,7 @@ namespace GestionArticles.Controllers
         [Route("ajouterCar")]
         public ActionResult CreateCar([Bind(Include = "id_societe,maricule,nombre_places")] Autocar autocar)
         {
-           
+            
             if (ModelState.IsValid)
             {
                 db.Autocars.Add(autocar);
@@ -201,9 +202,10 @@ namespace GestionArticles.Controllers
         }
 
         [Route("ajouterNavette")]
-        public ActionResult ajouterNavette()
+        public ActionResult ajouterNavette(string idd)
         {
-            ViewBag.id_car = new SelectList(db.Autocars, "id", "maricule");
+            int id = Int16.Parse(idd);
+            ViewBag.id_car = new SelectList(db.Autocars.Where(s => s.id_societe == @id), "id", "maricule");
             ViewBag.id_ville_depart = new SelectList(db.Villes, "id", "nom");
             ViewBag.id_ville_arriver = new SelectList(db.Villes, "id", "nom");
             return View();

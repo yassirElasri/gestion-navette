@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AutocarsController.cs" />
+    <Compile Include="Controllers\DemandesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\loginController.cs" />
     <Compile Include="Controllers\NavettesController.cs" />
@@ -260,6 +261,13 @@
     <Content Include="Views\Navettes\Edit.cshtml" />
     <Content Include="Views\Navettes\Index.cshtml" />
     <Content Include="Views\SocietéTransport\ajouterNavette.cshtml" />
+    <Content Include="Views\Utilisateurs\trouver_navette.cshtml" />
+    <Content Include="Views\Demandes\Create.cshtml" />
+    <Content Include="Views\Demandes\Delete.cshtml" />
+    <Content Include="Views\Demandes\Details.cshtml" />
+    <Content Include="Views\Demandes\Edit.cshtml" />
+    <Content Include="Views\Demandes\Index.cshtml" />
+    <Content Include="Views\Utilisateurs\ajouterNavette.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

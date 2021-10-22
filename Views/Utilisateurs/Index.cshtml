@@ -26,13 +26,8 @@
         <th>
             @Html.DisplayNameFor(model => model.mdp)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cofirm_mdp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Navette.id)
-        </th>
-        <th></th>
+     
+        <th>actions</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -52,12 +47,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.mdp)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cofirm_mdp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Navette.id)
-        </td>
+      
+       
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |
